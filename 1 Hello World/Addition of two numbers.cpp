@@ -13,7 +13,7 @@ int main(){
 
 /*int a,b,ssum=0;
 cout<<"enter two number=";
-cin>>a>>B;
+cin>>a>>b;
 sum=a+b;
 cout<<"sum"<<sum;*/
 
