@@ -1,0 +1,34 @@
+using System;
+
+class Node
+{
+    public int data;
+    public Node next;
+    public Node(int x)
+    {
+        data = x;
+        next = null;
+    }
+}
+
+class MainClass
+{
+    public static void PrintList(Node head)
+    {
+        Node curr = head;
+        while (curr != null)
+        {
+            Console.Write(curr.data + " ");
+            curr = curr.next;
+        }
+    }
+
+    public static void Main()
+    {
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+        head.next.next.next = new Node(40);
+        PrintList(head);
+    }
+}
