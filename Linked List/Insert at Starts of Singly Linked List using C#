@@ -1,0 +1,48 @@
+using System;
+
+class Node
+{
+    public int data;
+    public Node next;
+    public Node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}
+
+class LinkedList
+{
+    Node head;
+    public void insertAtBegin(int data)
+    {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void printList()
+    {
+        Node temp = head;
+        while (temp != null)
+        {
+            Console.Write(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        LinkedList list = new LinkedList();
+        list.insertAtBegin(1);
+        list.insertAtBegin(2);
+        list.insertAtBegin(3);
+        list.insertAtBegin(4);
+        list.insertAtBegin(5);
+        Console.Write("Linked List: ");
+        list.printList();
+    }
+}
