@@ -38,7 +38,3 @@ Fork and clone the repo or Drag and drop your code
   gh repo clone AnkitMajee/CPP
 ```
     
-# Contributors
-<a href="https://github.com/AnkitMajee/CPP/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AnkitMajee/CPP" />
-</a>
