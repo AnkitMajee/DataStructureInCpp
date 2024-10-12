@@ -37,4 +37,14 @@ Fork and clone the repo or Drag and drop your code
 ```bash
   gh repo clone AnkitMajee/CPP
 ```
-    
+
+## Awesome Contributors <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f31f/512.webp" width="35" height="30">
+	
+ <div align="center">
+	 <h3>Thank you for contributing to our repository</h3><br>
+	 <p align="center">
+		 <a href="https://github.com/AnkitMajee/DataStructureInCpp/graphs/contributors">
+			 <img src="https://contrib.rocks/image?repo=AnkitMajee/DataStructureInCpp" />
+		 </a>
+	 </p>
+ </div>
