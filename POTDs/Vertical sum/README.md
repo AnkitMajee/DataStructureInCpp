@@ -3,9 +3,9 @@
 <pre><span style="font-size: 18px;"><strong>Input:</strong></span>
      <span style="font-size: 18px;">  1
     /    \
-  2      3
+   2      3
  /  \    /  \
-4   5  6   7
+4   5   6    7
 <strong>Output: <br></strong>4 2 12 3 7<strong>
 Explanation:</strong></span>
 <span style="font-size: 18px;">The tree has 5 vertical lines
