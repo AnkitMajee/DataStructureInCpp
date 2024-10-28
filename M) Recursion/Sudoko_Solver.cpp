@@ -1,3 +1,21 @@
+// Question Details
+// You need to write a program that solves a Sudoku puzzle by filling the empty cells.
+// A Sudoku board is a 9x9 grid where some cells are filled with numbers from 1 to 9,
+// and others are empty (represented by '.'). The goal is to fill the empty cells
+// so that each row, each column, and each of the nine 3x3 sub-boxes contains
+// all of the digits from 1 to 9 without repetition.
+
+// Constraints
+// - The board is a 9x9 grid.
+// - You are guaranteed that the input Sudoku is valid and can be solved.
+
+// Input
+// - A 9x9 grid of characters, where digits '1' to '9' represent filled cells
+//   and '.' represents empty cells.
+
+// Output
+// - The solved Sudoku board, displayed as a 9x9 grid of characters.
+
 #include <iostream>
 #include <vector>
 
