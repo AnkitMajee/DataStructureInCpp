@@ -3,45 +3,52 @@
 // Given a graph, return the order of traversal of the graph starting from node 0
 
 // Intuition
-// This is also called the level order traversal
+// This is also called the level order traversal because we are exploring the graph level by level
+// Two nodes are said to be of the same level if the distance between them and the "start" node is the same
 
+// We use a queue and a visited hash set
+
+// We process nodes in the order they appear in the queue
+// And for each current node, we add its neighbors the the queue given that they have not already been "visited"
+// This is checked by maintaining a visited unordered_set
+
+// Very useful algo for a lot of problems
+// The other way to do is DFS
 
 // Solution
 
 #include <vector>
-#include <algorithm>
-#include <bits/stdc++.h>
+#include <queue>
+#include <unordered_set>
+#include <iostream>
 #include <iostream>
 using namespace std;
 
 class Solution {
 public:
-	
-    vector<vector<int>> floyd(vector<vector<int>> &adj , int n) {
-//        cout<<"?\n";
-        // the dist vector initial value is set to INT_MAX
-        // after processing, if distance is INT_MAX, that means there is no way from source to that node
-        vector<vector<int>> dist(n , vector<int>(n , -1));
-
-        for (int i = 0 ; i < n ; i++){
-            for (int j = 0 ; j < n ; j++){
-                dist[i][j] = adj[i][j];
-            }
-        }
-
-        for (int k = 0 ; k < n ; k++){
-            for (int i = 0 ; i < n ; i++){
-                for (int j = 0 ; j < n ; j++){
-                    if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && (dist[i][j] == INT_MAX || dist[i][j] > (dist[i][k] + dist[k][j]))){
-                        dist[i][j] = dist[i][k] + dist[k][j];
-                    }
+    vector<int> bfs(vector<vector<int>>& adjList , int n) {
+        vector<int> traversalOrder;
+        queue<int> q;
+        unordered_set<int> visited;
+        
+        // Start from node 0
+        q.push(0);
+        visited.insert(0);
+        
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            traversalOrder.push_back(node);
+            
+            for (int neighbor : adjList[node]) {
+                if (visited.find(neighbor) == visited.end()) {
+                    q.push(neighbor);
+                    visited.insert(neighbor);
                 }
             }
         }
-
-		
-		return dist;
-
+        
+        return traversalOrder;
     }
 };
 
@@ -49,28 +56,17 @@ int main()
 {
     Solution sol;
     // adjacency matrix
-        vector<vector<int>> adj = {
-        {0, 4, 1, INT_MAX, INT_MAX},
-        {INT_MAX, 0, INT_MAX, 1, INT_MAX},
-        {INT_MAX, 2, 0, 5, INT_MAX},
-        {INT_MAX, INT_MAX, INT_MAX, 0, 3},
-        {INT_MAX, INT_MAX, INT_MAX, INT_MAX, 0}};
-    // adj[i][j] is the weight of edge from i to j
+    vector<vector<int>> adj = {{1,2} , {0,3,4} , {0,4} , {1,5} , {1,2,5} , {3,4}};
+    // adj[i] means the neighbors of node i
     // if its INT_MAX, then the edge does not exist
-    
-    int n = 5;
 
-    vector<vector<int>> result = sol.floyd(adj , n);
+    int n = adj.size();
+
+
+    vector<int> result = sol.bfs(adj , n);
     cout << "Result : "<<endl;
     for (auto val:result){
-        for (auto value:val){
-        	if (value == INT_MAX){
-        		cout<<"INF\t";
-        		continue;
-			}
-            cout<<value<<"\t";
-        }
-        cout<<endl;
+        cout<<val<<endl;
     }
     cout<<endl;
 
