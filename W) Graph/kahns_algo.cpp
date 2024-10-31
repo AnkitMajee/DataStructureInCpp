@@ -12,80 +12,94 @@
 // This is a standard graph algorithm that is used to find the topological order of the graph
 // This helps us see dependencies between nodes and is useful for many problems
 
-// It works by maintaining a 
+// It works by maintaining a vector that contains the indegrees of all the nodes
+// Now if a node has 0 indegree, then that means it doesnt have any dependencies and so we can just write that directly to the answer
+// So we remove that node and then for each of that node's neighbors, we reduce their indegree by 1
+
+// This goes on untill we have elements in the queue to process
+// Elements are added to the queue when indegree is 0
+// If we have a cycle, then there will come a time when the queue will be empty but not all nodes have been processed, in this case, we can not
+// return the topological sort of the graph
 
 
 // Solution
-#include <vector>
-#include <algorithm>
-#include <bits/stdc++.h>
-#include <iostream>
+
+#include<vector>
+#include<iostream>
+#include<queue>
 using namespace std;
 
-class Solution {
-public:
-    void dfs(vector<vector<char>>& board, vector<vector<int>>& visit, int i, int j) {
-        int n = board.size(), m = board[0].size();
-        if (i < 0 || j < 0 || i >= n || j >= m || board[i][j] != 'O' || visit[i][j] == 1) {
-            return;
-        }
-        
-        // Mark as visited
-        visit[i][j] = 1;
-        
-        // Define movement offsets (up, down, left, right)
-        vector<vector<int>> offset = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        
-        // Traverse neighbors
-        for (auto value : offset) {
-            int new_row = i + value[0], new_col = j + value[1];
-            dfs(board, visit, new_row, new_col);
-        }
-    }
 
-    void solve(vector<vector<char>>& board) {
-        int n = board.size(), m = board[0].size();
-        vector<vector<int>> visit(n, vector<int>(m, 0));
-
-        // Mark all 'O's connected to the boundary
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (i == 0 || j == 0 || i == n - 1 || j == m - 1) {
-                    if (board[i][j] == 'O' && visit[i][j] != 1) {
-                        dfs(board, visit, i, j);
-                    }
-                }
-            }
-        }
-
-        // Flip unvisited 'O's to 'X' and keep visited ones as 'O'
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                board[i][j] = (visit[i][j] == 1) ? 'O' : 'X';
-            }
-        }
-    }
+class Solution
+{
+	public:
+	
+	vector<int> topo(int V , vector<vector<int>> adj){
+	    
+	    vector<int> indegree(V , 0);
+	    
+	    // calculate the indegree for all the vertices
+	    
+	    for (int i = 0 ; i < V ; i++){
+	        for (auto value:adj[i]){
+	            
+	            indegree[value]++;
+	        }
+	    }
+	    
+	    queue<int> q;
+	    
+	    for (int i = 0 ; i < V ; i++){
+	        if (indegree[i] == 0){
+	            q.push(i);
+	        }
+	    }
+	    vector<int> res;
+	    
+	    while (!q.empty()){
+	        int curr = q.front();
+	        res.push_back(curr);
+	        q.pop();
+	        
+	        for (auto value:adj[curr]){
+	            indegree[value]--;
+	            if (indegree[value] == 0){
+	                q.push(value);
+	            }
+	        }
+	        
+	        
+	    }
+	    
+	    if (res.size() == V){
+	        return res;
+	    }
+	    return {};
+	    
+	    
+	}
 };
 
+
 int main() {
-    Solution sol;
-    
-    vector<vector<char>> board = {
-        {'X', 'X', 'X', 'X'},
-        {'X', 'O', 'O', 'X'},
-        {'X', 'X', 'O', 'X'},
-        {'X', 'O', 'X', 'X'}
-    };
-    
-    sol.solve(board);
-    
-    cout << "Board after solving:" << endl;
-    for (const auto& row : board) {
-        for (char cell : row) {
-            cout << cell << " ";
+
+    int n = 6;
+    vector<vector<int>> adj = {{},{},{3},{1},{0,1},{0,2}};
+
+    Solution s;
+
+    // call the topological sort function
+    vector<int> result = s.topo(n, adj);
+
+    if (result.empty()) {
+        cout << "There is a cycle in the graph, topological sorting not possible." << endl;
+    } else {
+        cout << " Result : ";
+        for (int i : result) {
+            cout << i << " ";
         }
         cout << endl;
     }
-    
+
     return 0;
 }
