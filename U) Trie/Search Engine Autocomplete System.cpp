@@ -45,6 +45,22 @@ public:
         root = new TrieNode();
     }
 
+    ~Trie() {
+        deleteAll(root);
+    }
+
+private:
+    void deleteAll(TrieNode* node) {
+        if (!node) return;
+        // Recursively delete all children
+        for (int i = 0; i < 26; i++) {  // Assuming 26 letters a-z
+            if (node->children[i]) {
+                deleteAll(node->children[i]);
+            }
+        }
+        delete node;
+    }
+
     void insert(const string &word, int frequency)
     {
         TrieNode *current = root;
