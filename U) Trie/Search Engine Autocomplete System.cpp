@@ -90,10 +90,7 @@ private:
         }
 
         priority_queue<pair<int, string>> pq;
-        for (const auto &entry : current->wordFrequency)
-        {
-            pq.push({entry.second, entry.first}); // Store frequency and word
-        }
+        collectAllWords(current, pq);
 
         int count = 0;
         while (!pq.empty() && count < K)
@@ -104,6 +101,23 @@ private:
         }
 
         return results;
+    }
+
+    void collectAllWords(TrieNode* node, priority_queue<pair<int, string>>& pq)
+    {
+        if (!node) return;
+        
+        // Add words at current node
+        for (const auto &entry : node->wordFrequency)
+        {
+            pq.push({entry.second, entry.first});
+        }
+        
+        // Recursively collect from children
+        for (const auto &child : node->children)
+        {
+            collectAllWords(child.second, pq);
+        }
     }
 
     bool deleteWord(const string &word)
