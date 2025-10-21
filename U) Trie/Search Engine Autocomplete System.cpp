@@ -32,6 +32,11 @@ public:
     unordered_map<string, int> wordFrequency;
 
     TrieNode() {}
+    ~TrieNode() {
+        for (auto& pair : children) { 
+            delete pair.second; 
+        } 
+    }
 };
 
 class Trie
@@ -52,11 +57,8 @@ public:
 private:
     void deleteAll(TrieNode* node) {
         if (!node) return;
-        // Recursively delete all children
-        for (int i = 0; i < 26; i++) {  // Assuming 26 letters a-z
-            if (node->children[i]) {
-                deleteAll(node->children[i]);
-            }
+        for (auto& pair : node->children) { 
+            deleteAll(pair.second); 
         }
         delete node;
     }
@@ -132,7 +134,7 @@ private:
             if (current->wordFrequency.find(word) != current->wordFrequency.end())
             {
                 current->wordFrequency.erase(word);
-                return current->children.empty();
+                return current->children.empty() && current->wordFrequency.empty();
             }
             return false;
         }
@@ -149,7 +151,7 @@ private:
         if (shouldDeleteCurrentNode)
         {
             current->children.erase(c);
-            return current->children.empty();
+            return current->children.empty() && current->wordFrequency.empty();
         }
 
         return false;
