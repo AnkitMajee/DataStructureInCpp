@@ -24,30 +24,35 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<int> bfs(vector<vector<int>>& adjList , int n) {
+    vector<int> bfs(vector<vector<int>> &adjList, int n)
+    {
         vector<int> traversalOrder;
         queue<int> q;
         unordered_set<int> visited;
-        
+
         // Start from node 0
         q.push(0);
         visited.insert(0);
-        
-        while (!q.empty()) {
+
+        while (!q.empty())
+        {
             int node = q.front();
             q.pop();
             traversalOrder.push_back(node);
-            
-            for (int neighbor : adjList[node]) {
-                if (visited.find(neighbor) == visited.end()) {
+
+            for (int neighbor : adjList[node])
+            {
+                if (visited.find(neighbor) == visited.end())
+                {
                     q.push(neighbor);
                     visited.insert(neighbor);
                 }
             }
         }
-        
+
         return traversalOrder;
     }
 };
@@ -56,19 +61,19 @@ int main()
 {
     Solution sol;
     // adjacency matrix
-    vector<vector<int>> adj = {{1,2} , {0,3,4} , {0,4} , {1,5} , {1,2,5} , {3,4}};
+    vector<vector<int>> adj = {{1, 2}, {0, 3, 4}, {0, 4}, {1, 5}, {1, 2, 5}, {3, 4}};
     // adj[i] means the neighbors of node i
     // if its INT_MAX, then the edge does not exist
 
     int n = adj.size();
 
-
-    vector<int> result = sol.bfs(adj , n);
-    cout << "Result : "<<endl;
-    for (auto val:result){
-        cout<<val<<endl;
+    vector<int> result = sol.bfs(adj, n);
+    cout << "Result : " << endl;
+    for (auto val : result)
+    {
+        cout << val << endl;
     }
-    cout<<endl;
+    cout << endl;
 
     return 0;
 }

@@ -8,8 +8,8 @@
 
 // Each range [a,b] in the list should be output as:
 
-        // "a->b" if a != b
-        // "a" if a == b
+// "a->b" if a != b
+// "a" if a == b
 
 // Input
 // nums - a vector of integers
@@ -72,14 +72,16 @@ public:
 int main()
 {
     Solution sol;
-    vector<int> nums = {0, 1, 2, 4, 5, 7};
 
+    vector<int> nums = {0, 1, 2, 4, 5, 7};
     vector<string> result = sol.summaryRanges(nums);
-    cout << "Result : "<<endl;
-    for (auto value:result){
-        cout<<value<<"\t";
+    
+    cout << "Result : " << endl;
+    for (auto value : result)
+    {
+        cout << value << "\t";
     }
-    cout<<endl;
+    cout << endl;
 
     return 0;
 }

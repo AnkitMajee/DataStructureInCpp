@@ -1,43 +1,49 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main(){
+
+int main()
+{
 	char c;
-	cout<<"Enter a alphabet:";
-	cin>>c;
-	switch(c){
-        case'a':
-		cout<<"Its Vowel"<<endl;
+
+	cout << "Enter a alphabet : ";
+	cin >> c;
+
+	switch (c)
+	{
+	case 'a':
+		cout << "Its Vowel" << endl;
 		break;
-		case'e':
-		cout<<"Its Vowel"<<endl;
+	case 'e':
+		cout << "Its Vowel" << endl;
 		break;
-		case'i':
-		cout<<"Its Vowel"<<endl;
+	case 'i':
+		cout << "Its Vowel" << endl;
 		break;
-		case'o':
-		cout<<"Its Vowel"<<endl;
+	case 'o':
+		cout << "Its Vowel" << endl;
 		break;
-		case'u':
-		cout<<"Its Vowel"<<endl;
+	case 'u':
+		cout << "Its Vowel" << endl;
 		break;
-		case'A':
-		cout<<"Its Vowel"<<endl;
+	case 'A':
+		cout << "Its Vowel" << endl;
 		break;
-		case'E':
-		cout<<"Its Vowel"<<endl;
+	case 'E':
+		cout << "Its Vowel" << endl;
 		break;
-		case'I':
-		cout<<"Its Vowel"<<endl;
+	case 'I':
+		cout << "Its Vowel" << endl;
 		break;
-		case'O':
-		cout<<"Its Vowel"<<endl;
+	case 'O':
+		cout << "Its Vowel" << endl;
 		break;
-		case'U':
-		cout<<"Its Vowel"<<endl;
+	case 'U':
+		cout << "Its Vowel" << endl;
 		break;
-		default:
-			cout<<"Its a consonant"<<endl;
-			break;
+	default:
+		cout << "Its a consonant" << endl;
+		break;
 	}
+
 	return 0;
 }

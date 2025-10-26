@@ -11,40 +11,41 @@
 // Input: root = [-10,9,20,null,null,15,7]
 // Output: 42
 // Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
- 
 
 // Constraints:
 // The number of nodes in the tree is in the range [1, 3 * 104].
 // -1000 <= Node.val <= 1000
 
-int maxSum(TreeNode* root, int& ans) {
-    /* This function return the Branch Sum......
-    So if the node is NULL then it won't have a branch....so the branch sum will be 0.
-    */
-    //Base Case
-    if(root == NULL){
+#include <iostream>
+#include <climits>
+using namespace std;
+
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+int maxSum(TreeNode *root, int &ans)
+{
+    if (root == NULL)
         return 0;
-    }
-    
-    //Recursive Case 
-    //BS = Branch Sum
-    int leftBS = root->val + maxSum( root->left , ans );
-    int rightBS = root->val + maxSum( root->right , ans );
-    
-    ans = max({
-                ans,            //we may have found the maximum ans already
-                root->val,      //may be the current root val is the maximum sum possible
-                leftBS,         //may be the answer contain root->val + left branch value
-                rightBS,        //may be the answer contain root->val + right branch value
-                leftBS + rightBS - root->val   // may be ans conatin left branch + right branch + root->val
-                                               // Since the root val is added twice from leftBS and rightBS so we are sunstracting it.
-            });
-    
-    //Return the max branch Sum
-    return max({ leftBS , rightBS , root->val });
+
+    // Recursively find maximum branch sums from left and right
+    int leftBS = max(0, maxSum(root->left, ans)); // Ignore negative paths
+    int rightBS = max(0, maxSum(root->right, ans));
+
+    // Update the global maximum with the best path passing through the root
+    ans = max(ans, root->val + leftBS + rightBS);
+
+    // Return the best branch (root + one side)
+    return root->val + max(leftBS, rightBS);
 }
 
-int maxPathSum(TreeNode* root) {
+int maxPathSum(TreeNode *root)
+{
     int ans = INT_MIN;
     maxSum(root, ans);
     return ans;

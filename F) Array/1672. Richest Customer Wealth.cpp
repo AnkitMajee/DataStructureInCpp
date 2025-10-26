@@ -1,17 +1,24 @@
-//Saksham Dewan
-class Solution {
+// Saksham Dewan
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution
+{
 public:
-    int maximumWealth(vector<vector<int>>& accounts) {
-        int max=0, m=accounts.size(), n=accounts[0].size();
+    int maximumWealth(vector<vector<int>> &accounts)
+    {
+        int max = 0, m = accounts.size(), n = accounts[0].size();
         vector<int> wealth;
-        for(int i=0;i<m;i++)
+        for (int i = 0; i < m; i++)
         {
-            int sum=0;
-            for(int j=0;j<n;j++)
+            int sum = 0;
+            for (int j = 0; j < n; j++)
             {
-                sum+=accounts[i][j];
+                sum += accounts[i][j];
             }
-            if(sum>max) max=sum;
+            if (sum > max)
+                max = sum;
         }
         return max;
     }
