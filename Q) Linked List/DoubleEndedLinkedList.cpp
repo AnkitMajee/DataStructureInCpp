@@ -100,7 +100,7 @@ public:
             length--;
         }
     }
-    
+
     void deleteValue(int value)
     {
         int index = 0;

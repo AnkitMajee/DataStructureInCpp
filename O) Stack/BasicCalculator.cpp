@@ -1,8 +1,7 @@
-#include<iostream>
-#include<stack>
-#include<vector>
-#include<string.h>
-
+#include <iostream>
+#include <stack>
+#include <vector>
+#include <string.h>
 using namespace std;
 
 // Problem Statement:
@@ -21,18 +20,23 @@ using namespace std;
 // Input: s = "(1+(4+5+2)-3)+(6+8)"
 // Output: 23
 
-string solve(string s, int &index, int len){
+string solve(string s, int &index, int len)
+{
     stack<string> st;
     string num = "";
     char x;
-    for (int i= index; i < len; i++){
+    for (int i = index; i < len; i++)
+    {
         x = s[i];
         num = "";
-        if (x == ' '){
+        if (x == ' ')
+        {
             continue;
         }
-        if ((x-48)>=0 && (x-48)<=9){
-            while((x-48)>=0 && (x-48)<=9 && i<len){
+        if ((x - 48) >= 0 && (x - 48) <= 9)
+        {
+            while ((x - 48) >= 0 && (x - 48) <= 9 && i < len)
+            {
                 num.push_back(x);
                 i++;
                 x = s[i];
@@ -40,25 +44,31 @@ string solve(string s, int &index, int len){
             i--;
             x = s[i];
         }
-        else if (x == '+' || x == '-'){
-            if (st.empty()){
+        else if (x == '+' || x == '-')
+        {
+            if (st.empty())
+            {
                 st.push("0");
             }
             num.push_back(x);
             st.push(num);
             continue;
         }
-        if (x == '('){
+        if (x == '(')
+        {
             index = i + 1;
             num = solve(s, index, len);
             i = index;
         }
-        else if (x == ')'){
+        else if (x == ')')
+        {
             index = i;
             return st.top();
         }
-        if (!st.empty()){
-            if (st.top() == "+"){
+        if (!st.empty())
+        {
+            if (st.top() == "+")
+            {
                 st.pop();
                 int a = std::stoi(st.top());
                 int b = std::stoi(num);
@@ -66,7 +76,8 @@ string solve(string s, int &index, int len){
                 st.pop();
                 st.push(to_string(temp));
             }
-            else if (st.top() == "-"){
+            else if (st.top() == "-")
+            {
                 st.pop();
                 int a = std::stoi(st.top());
                 st.pop();
@@ -74,23 +85,29 @@ string solve(string s, int &index, int len){
                 st.push(to_string(temp));
             }
         }
-        else {
+        else
+        {
             st.push(num);
         }
     }
     return st.top();
 }
-int calculate(string s) {
+
+int calculate(string s)
+{
     int index = 0;
     return std::stoi(solve(s, index, s.length()));
 }
 
-int main(){
-    // Example 1: 
+int main()
+{
+    // Example 1:
     string s = "1 + 1";
-    cout<<calculate(s)<<endl;
+    cout << calculate(s) << endl;
+    // Example 2:
     s = " 2-1 + 2 ";
-    cout<<calculate(s)<<endl;
+    cout << calculate(s) << endl;
+    // Example 3:
     s = "(1+(4+5+2)-3)+(6+8)";
-    cout<<calculate(s)<<endl;
+    cout << calculate(s) << endl;
 }

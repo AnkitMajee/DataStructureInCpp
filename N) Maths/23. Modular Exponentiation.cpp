@@ -3,7 +3,7 @@
 Modular Exponentiation
 Given three numbers x, y and p, compute (x^y)%p
 
-Constraints : 
+Constraints :
 1 ≤ x, y, p ≤ 10^9
 
 Time Complexity : O(log(n))
@@ -13,19 +13,23 @@ Practice Problem Link : https://practice.geeksforgeeks.org/problems/modular-expo
 
 */
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Exponentiation{
+struct Exponentiation
+{
 
-    long long mod_expo(long long a, long long b, long long mod){
-        if (b == 0 || b == 1) return a;
-        else if (b & 1){
+    long long mod_expo(long long a, long long b, long long mod)
+    {
+        if (b == 0 || b == 1)
+            return a;
+        else if (b & 1)
+        {
             long long ans = mod_expo(a, b / 2, mod) % mod;
             return (((1LL * ans * ans) % mod) * a) % mod;
         }
-        else{
+        else
+        {
             long long ans = mod_expo(a, b / 2, mod) % mod;
             return (1LL * ans * ans) % mod;
         }
@@ -34,9 +38,11 @@ struct Exponentiation{
 
 int32_t main()
 {
-    long long x,y,p;
+    long long x, y, p;
     cin >> x >> y >> p;
+
     struct Exponentiation E;
-    cout << E.mod_expo(x,y,p) << "\n";
+    cout << E.mod_expo(x, y, p) << "\n";
+    
     return 0;
 }

@@ -34,26 +34,32 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int minAddToMakeValid(string s) {
-        unordered_map<char , char> m = {{'(' , '}'} , {')' , '('}};
+    int minAddToMakeValid(string s)
+    {
+        unordered_map<char, char> m = {{'(', '}'}, {')', '('}};
 
         stack<char> letters;
         int res = 0;
-        for (auto value:s){
-            if (value == '('){
+        for (auto value : s)
+        {
+            if (value == '(')
+            {
                 letters.push(value);
             }
-            else{
-                if (letters.empty() || letters.top() != '('){
+            else
+            {
+                if (letters.empty() || letters.top() != '(')
+                {
                     letters.push('(');
                     res++;
                 }
                 letters.pop();
             }
         }
-    
+
         res += letters.size();
 
         return res;

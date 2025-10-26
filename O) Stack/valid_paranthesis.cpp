@@ -19,7 +19,6 @@
 // 1. if when we encounter an opening bracket, the correspongind closing bracket is not at the top of the stack
 // 2. if after processing the whole string, there are elements still in the stack
 
-
 // Solution
 
 #include <vector>
@@ -28,20 +27,26 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    bool isValid(string temp) {
+    bool isValid(string temp)
+    {
         stack<char> s;
-        unordered_map<char , char> relation = {{')' , '('} , {']' , '['} , {'}' , '{'}};
+        unordered_map<char, char> relation = {{')', '('}, {']', '['}, {'}', '{'}};
 
-        for (auto value:temp){
+        for (auto value : temp)
+        {
             // this is the case of opening brackets
-            if (relation.find(value) == relation.end()){
+            if (relation.find(value) == relation.end())
+            {
                 s.push(value);
             }
-            else{
+            else
+            {
                 char required = relation[value];
-                if (s.empty() || s.top() != required){
+                if (s.empty() || s.top() != required)
+                {
                     return false;
                 }
                 s.pop();

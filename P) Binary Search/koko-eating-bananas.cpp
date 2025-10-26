@@ -36,56 +36,63 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-
-    bool cond(vector<int> piles, int h, int mid){
+    bool cond(vector<int> piles, int h, int mid)
+    {
         int counter = 0;
 
-        for (auto value:piles){
+        for (auto value : piles)
+        {
             counter += value / mid;
-            if (value % mid != 0){
+            if (value % mid != 0)
+            {
                 counter++;
             }
         }
-        
-        if (counter <= h){
+
+        if (counter <= h)
+        {
             return true;
         }
         return false;
-
     }
 
-    int minEatingSpeed(vector<int>& piles, int h) {
+    int minEatingSpeed(vector<int> &piles, int h)
+    {
         int left = 1;
         int right = 1e9;
 
-        for (auto value:piles){
-            right = max(right,value);
+        for (auto value : piles)
+        {
+            right = max(right, value);
         }
 
-        while (left < right){
-            
+        while (left < right)
+        {
+
             int mid = left + (right - left) / 2;
-            if (cond(piles,h,mid)){
+            if (cond(piles, h, mid))
+            {
                 right = mid;
             }
-            else{
+            else
+            {
                 left = mid + 1;
             }
         }
         return left;
-
     }
 };
 
 int main()
 {
     Solution sol;
-    vector<int> piles = {3,6,7,11};
+    vector<int> piles = {3, 6, 7, 11};
     int h = 8;
 
-    int result = sol.minEatingSpeed(piles , h);
+    int result = sol.minEatingSpeed(piles, h);
     cout << "Result : " << result << endl;
 
     return 0;

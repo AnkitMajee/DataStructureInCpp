@@ -3,11 +3,18 @@
     Level : Medium
     Reference : https://www.geeksforgeeks.org/problems/reverse-a-stack/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=reverse-a-stack
 */
-class Solution{
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class Solution
+{
 public:
-    void Reverse(stack<int> &St){
+    void Reverse(stack<int> &St)
+    {
         // Base case: if stack is empty, return
-        if (St.empty()) {
+        if (St.empty())
+        {
             return;
         }
 
@@ -24,9 +31,11 @@ public:
 
 private:
     // Helper function to place an element at the bottom of the stack
-    void insertAtBottom(stack<int>& St, int num) {
+    void insertAtBottom(stack<int> &St, int num)
+    {
         // Base case: if stack is empty, push the element
-        if (St.empty()) {
+        if (St.empty())
+        {
             St.push(num);
             return;
         }

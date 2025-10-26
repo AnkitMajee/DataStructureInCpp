@@ -13,7 +13,6 @@
 // Output
 // For each test case output one integer: the largest minimum distance.
 
-
 // Solution
 
 #include <iostream>
@@ -21,41 +20,51 @@
 #include <algorithm>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
     // Helper function to check if cows can be placed with at least 'mid' distance
-    bool chk(vector<int> &stalls, int k, int mid) {
+    bool chk(vector<int> &stalls, int k, int mid)
+    {
         int pos = stalls[0]; // First cow is placed at the first stall
         int cnt = 1;         // Count the first cow
 
         // Try to place the remaining cows
-        for (int i = 1; i < stalls.size(); i++) {
-            if (stalls[i] - pos >= mid) { // If the distance is enough
+        for (int i = 1; i < stalls.size(); i++)
+        {
+            if (stalls[i] - pos >= mid)
+            { // If the distance is enough
                 cnt++;
-                if (cnt == k) return true; // If all cows are placed
-                pos = stalls[i];           // Place next cow at this stall
+                if (cnt == k)
+                    return true; // If all cows are placed
+                pos = stalls[i]; // Place next cow at this stall
             }
         }
         return false; // Not all cows could be placed with 'mid' distance
     }
 
     // Main function to solve the problem
-    int solve(int n, int k, vector<int> &stalls) {
+    int solve(int n, int k, vector<int> &stalls)
+    {
         // Sort the stalls to apply binary search
         sort(stalls.begin(), stalls.end());
-        
+
         // Initialize low and high for binary search
-        int lo = 1, hi = stalls[n-1] - stalls[0], mid;
+        int lo = 1, hi = stalls[n - 1] - stalls[0], mid;
         int ans = 0;
 
         // Binary search for the largest minimum distance
-        while (lo <= hi) {
+        while (lo <= hi)
+        {
             mid = (lo + hi) / 2;
 
-            if (chk(stalls, k, mid)) {
+            if (chk(stalls, k, mid))
+            {
                 ans = mid;    // Update answer
                 lo = mid + 1; // Try for a larger distance
-            } else {
+            }
+            else
+            {
                 hi = mid - 1; // Try for a smaller distance
             }
         }
@@ -64,11 +73,12 @@ public:
 };
 
 // Sample main function for testing
-int main() {
+int main()
+{
     Solution sol;
     vector<int> stalls = {1, 2, 4, 8, 9}; // Example stalls
-    int n = stalls.size(); // Number of stalls
-    int k = 3;             // Number of cows to place
+    int n = stalls.size();                // Number of stalls
+    int k = 3;                            // Number of cows to place
 
     int result = sol.solve(n, k, stalls);
     cout << "The largest minimum distance is: " << result << endl;
