@@ -1,21 +1,28 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main(){
+
+int main()
+{
 	int n;
-	cout<<"Enter Size :-";
-	cin>>n;
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=n;j++){
-			if(j<=n-i){
 
-			cout<<"  ";
+	cout << "Enter Size : ";
+	cin >> n;
+	
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j <= n - i)
+			{
+
+				cout << "  ";
 			}
-			else{
-			cout<<"* ";
+			else
+			{
+				cout << "* ";
+			}
 		}
-		}
-		cout<<endl;
+		cout << endl;
 	}
-return 0;
+	return 0;
 }
-

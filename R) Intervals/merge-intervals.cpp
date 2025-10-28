@@ -1,7 +1,7 @@
 // Merge Intervals
 
-// Given an array of intervals where intervals[i] = [starti, endi], 
-// merge all overlapping intervals, and return an array of the 
+// Given an array of intervals where intervals[i] = [starti, endi],
+// merge all overlapping intervals, and return an array of the
 // non-overlapping intervals that cover all the intervals in the input.
 
 // Input
@@ -33,54 +33,62 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-
-    static bool comp(vector<int> &a , vector<int> &b){
-        if (a[1] == b[1]){
+    static bool comp(vector<int> &a, vector<int> &b)
+    {
+        if (a[1] == b[1])
+        {
             return a[0] < b[0];
         }
-        return a[1]< b[1];
+        return a[1] < b[1];
     }
 
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        sort(intervals.begin() , intervals.end() , comp);
+    vector<vector<int>> merge(vector<vector<int>> &intervals)
+    {
+        sort(intervals.begin(), intervals.end(), comp);
 
         int size = intervals.size();
-		vector<vector<int>> curr = {intervals[size - 1]};
-		
-		vector<int> temp;
-		for (int i = size - 2 ; i >= 0 ; i--){
-			temp = curr.back();
-			curr.pop_back();
-			
-			if (intervals[i][1] < temp[0]){
-				curr.push_back(temp);
-				curr.push_back(intervals[i]);
-			}
-			else{
-				temp[0] = min(temp[0] , intervals[i][0]);
-				curr.push_back(temp);
-			}
-		}
+        vector<vector<int>> curr = {intervals[size - 1]};
+
+        vector<int> temp;
+        for (int i = size - 2; i >= 0; i--)
+        {
+            temp = curr.back();
+            curr.pop_back();
+
+            if (intervals[i][1] < temp[0])
+            {
+                curr.push_back(temp);
+                curr.push_back(intervals[i]);
+            }
+            else
+            {
+                temp[0] = min(temp[0], intervals[i][0]);
+                curr.push_back(temp);
+            }
+        }
 
         return curr;
-
     }
 };
 
 int main()
 {
     Solution sol;
-    vector<vector<int>> nums = {{1,3},{2,6},{8,10},{15,18}};
-
+    
+    vector<vector<int>> nums = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
     vector<vector<int>> result = sol.merge(nums);
-    reverse(result.begin() ,result.end());
-    cout << "Result : "<<endl;
-    for (auto val:result){
-        cout<<val[0]<<" - "<<val[1]<<endl;
+
+    reverse(result.begin(), result.end());
+
+    cout << "Result : " << endl;
+    for (auto val : result)
+    {
+        cout << val[0] << " - " << val[1] << endl;
     }
-    cout<<endl;
+    cout << endl;
 
     return 0;
 }

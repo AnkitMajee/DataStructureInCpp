@@ -1,17 +1,18 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 // Define the node structure for the binary tree
-struct Node {
+struct Node
+{
     int data;
-    Node* left;
-    Node* right;
+    Node *left;
+    Node *right;
 };
 
 // Function to create a new node with given data
-Node* newNode(int data) {
-    Node* node = new Node;
+Node *newNode(int data)
+{
+    Node *node = new Node;
     node->data = data;
     node->left = NULL;
     node->right = NULL;
@@ -19,14 +20,21 @@ Node* newNode(int data) {
 }
 
 // Function to insert a node in the binary tree
-Node* insert(Node* root, int data) {
-    if (root == NULL) {
+Node *insert(Node *root, int data)
+{
+    if (root == NULL)
+    {
         return newNode(data);
-    } else {
-        if (data <= root->data) {
-        	//cout<<data<<root->data<<endl;
+    }
+    else
+    {
+        if (data <= root->data)
+        {
+            // cout<<data<<root->data<<endl;
             root->left = insert(root->left, data);
-        } else {
+        }
+        else
+        {
             root->right = insert(root->right, data);
         }
         return root;
@@ -34,17 +42,20 @@ Node* insert(Node* root, int data) {
 }
 
 // Function to print the binary tree in preorder traversal
-void preorder(Node* root) {
-    if (root != NULL) {
-    	cout << root->data << " ";
+void preorder(Node *root)
+{
+    if (root != NULL)
+    {
+        cout << root->data << " ";
         preorder(root->left);
         preorder(root->right);
     }
 }
 
-int main() {
+int main()
+{
     // Create a new binary tree
-    Node* root = NULL;
+    Node *root = NULL;
     root = insert(root, 5);
     root = insert(root, 3);
     root = insert(root, 7);
@@ -60,9 +71,4 @@ int main() {
     return 0;
 }
 
-
-
-
-
-//Goto tools > Editor Option > Snippets >Default Source Code
-
+// Goto tools > Editor Option > Snippets >Default Source Code

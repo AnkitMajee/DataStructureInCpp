@@ -32,10 +32,12 @@ public:
     unordered_map<string, int> wordFrequency;
 
     TrieNode() {}
-    ~TrieNode() {
-        for (auto& pair : children) { 
-            delete pair.second; 
-        } 
+    ~TrieNode()
+    {
+        for (auto &pair : children)
+        {
+            delete pair.second;
+        }
     }
 };
 
@@ -50,15 +52,18 @@ public:
         root = new TrieNode();
     }
 
-    ~Trie() {
+    ~Trie()
+    {
         deleteAll(root);
     }
 
-private:
-    void deleteAll(TrieNode* node) {
-        if (!node) return;
-        for (auto& pair : node->children) { 
-            deleteAll(pair.second); 
+    void deleteAll(TrieNode *node)
+    {
+        if (!node)
+            return;
+        for (auto &pair : node->children)
+        {
+            deleteAll(pair.second);
         }
         delete node;
     }
@@ -105,16 +110,17 @@ private:
         return results;
     }
 
-    void collectAllWords(TrieNode* node, priority_queue<pair<int, string>>& pq)
+    void collectAllWords(TrieNode *node, priority_queue<pair<int, string>> &pq)
     {
-        if (!node) return;
-        
+        if (!node)
+            return;
+
         // Add words at current node
         for (const auto &entry : node->wordFrequency)
         {
             pq.push({entry.second, entry.first});
         }
-        
+
         // Recursively collect from children
         for (const auto &child : node->children)
         {
@@ -202,6 +208,7 @@ int main()
 
     cout << "Autocomplete for 'app': ";
     vector<string> results = trie.autocomplete("app", 3);
+    
     for (const string &word : results)
     {
         cout << word << " ";
@@ -215,6 +222,7 @@ int main()
 
     cout << "Autocomplete for 'app' after frequency update: ";
     results = trie.autocomplete("app", 3);
+
     for (const string &word : results)
     {
         cout << word << " ";

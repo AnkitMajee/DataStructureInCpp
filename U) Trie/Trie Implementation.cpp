@@ -61,10 +61,12 @@ public:
         // RECURSION
         insertUtil(child, word.substr(1));
     }
+
     void insertWord(string word)
     {
         insertUtil(root, word);
     }
+
     bool searchUtil(TrieNode *root, string word)
     {
         // base case
@@ -87,10 +89,12 @@ public:
         }
         return searchUtil(child, word.substr(1));
     }
+
     bool searchWord(string word)
     {
         return searchUtil(root, word);
     }
+
     void deleteUtil(TrieNode *root, string word)
     {
         if (word.length() == 0)
@@ -113,20 +117,26 @@ public:
         }
         return deleteUtil(child, word.substr(1));
     }
+
     void deleteWord(string word)
     {
         deleteUtil(root, word);
     }
 };
+
 int main()
 {
     Trie *t = new Trie();
+
     t->insertWord("ARM");
     t->insertWord("DO");
     t->insertWord("TIME");
     t->insertWord("HELLO");
+
     cout << "Present or Not DO " << t->searchWord("DO") << endl;
+
     t->deleteWord("DO");
+    
     cout << "Present or Not DO " << t->searchWord("DO") << endl;
     cout << t->searchWord("HEL") << endl;
 

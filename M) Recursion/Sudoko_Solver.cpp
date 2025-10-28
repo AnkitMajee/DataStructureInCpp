@@ -21,22 +21,31 @@
 
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    void solveSudoku(vector<vector<char>>& board) {
+    void solveSudoku(vector<vector<char>> &board)
+    {
         solve(board);
     }
 
-
-    bool solve(vector<vector<char>>& board) {
-        for (int i = 0; i < board.size(); i++) {
-            for (int j = 0; j < board.size(); j++) {
-                if (board[i][j] == '.') {
-                    for (char c = '1'; c <= '9'; c++) {
-                        if (isValid(board, i, j, c)) {
+    bool solve(vector<vector<char>> &board)
+    {
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board.size(); j++)
+            {
+                if (board[i][j] == '.')
+                {
+                    for (char c = '1'; c <= '9'; c++)
+                    {
+                        if (isValid(board, i, j, c))
+                        {
                             board[i][j] = c;
-                            if (solve(board)) return true;
-                            else board[i][j] = '.'; // backtrack
+                            if (solve(board))
+                                return true;
+                            else
+                                board[i][j] = '.'; // backtrack
                         }
                     }
                     return false; // if no number can be placed, return false
@@ -46,22 +55,29 @@ public:
         return true; // solved
     }
 
-    bool isValid(vector<vector<char>>& board, int row, int col, char c) {
-        for (int i = 0; i < 9; i++) {
+    bool isValid(vector<vector<char>> &board, int row, int col, char c)
+    {
+        for (int i = 0; i < 9; i++)
+        {
             // Check the column and row
-            if (board[i][col] == c || board[row][i] == c) return false;
+            if (board[i][col] == c || board[row][i] == c)
+                return false;
             // Check the 3x3 box
-            if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false;
+            if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
+                return false;
         }
         return true;
     }
 };
 
-int main() {
+int main()
+{
     vector<vector<char>> board(9, vector<char>(9));
     cout << "Enter the Sudoku board (use '.' for empty cells):\n";
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
             cin >> board[i][j];
         }
     }
@@ -70,8 +86,10 @@ int main() {
     solution.solveSudoku(board);
 
     cout << "Solved Sudoku board:\n";
-    for (const auto& row : board) {
-        for (char cell : row) {
+    for (const auto &row : board)
+    {
+        for (char cell : row)
+        {
             cout << cell << ' ';
         }
         cout << endl;

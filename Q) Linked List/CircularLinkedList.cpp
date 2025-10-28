@@ -14,6 +14,7 @@ public:
         this->next = NULL;
     }
 };
+
 void InsertNode(Node *&tail, int element, int d)
 {
 
@@ -35,6 +36,7 @@ void InsertNode(Node *&tail, int element, int d)
         curr->next = newnode;
     }
 }
+
 void print(Node *tail)
 {
     Node *temp = tail;
@@ -71,6 +73,7 @@ void Delete(Node *tail, int element)
     }
     delete (curr);
 }
+
 int main()
 {
     Node *tail = NULL;

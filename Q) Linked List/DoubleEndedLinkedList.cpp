@@ -1,79 +1,97 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
-class Node{
+class Node
+{
 public:
     int value;
-    Node* next;
-    Node* prev;
-    Node(int data){
+    Node *next;
+    Node *prev;
+    Node(int data)
+    {
         this->value = data;
         this->next = NULL;
         this->prev = NULL;
     }
 };
 
-class DLL{
+class DLL
+{
 public:
     int length = 0;
-    Node* head = NULL;
-    Node* tail = NULL;
-    void insert(int data){
-        Node* x = new Node(data);
-        if (head == NULL){
+    Node *head = NULL;
+    Node *tail = NULL;
+    void insert(int data)
+    {
+        Node *x = new Node(data);
+        if (head == NULL)
+        {
             head = x;
             tail = x;
         }
-        else {
+        else
+        {
             tail->next = x;
             x->prev = tail;
             tail = tail->next;
         }
         length++;
     }
-    void display(){
-        Node* temp = head;
-        while (temp!=NULL){
-            cout<<temp->value<<"->";
-            temp=temp->next;
+
+    void display()
+    {
+        Node *temp = head;
+        while (temp != NULL)
+        {
+            cout << temp->value << "->";
+            temp = temp->next;
         }
-        cout<<endl;
+        cout << endl;
     }
-    void deletePosition(int index){
+
+    void deletePosition(int index)
+    {
         // cout<<length<<" "<<index<<endl;
-        Node* temp = head;
-        if (index>=length) {
-            cout<<"Invalid Index"<<endl;
+        Node *temp = head;
+        if (index >= length)
+        {
+            cout << "Invalid Index" << endl;
             return;
         }
-        else {
-            if (index == 0){
+        else
+        {
+            if (index == 0)
+            {
                 // delete head
                 temp = head->next;
                 head->next = NULL;
                 temp->prev = NULL;
                 head = temp;
             }
-            else if (head == tail){
+            else if (head == tail)
+            {
                 // only one element in linkedlist
                 head = NULL;
                 tail = NULL;
             }
-            else if (index == length-1){
+            else if (index == length - 1)
+            {
                 // delete tail
                 temp = tail->prev;
                 temp->next = NULL;
                 tail->prev = NULL;
                 tail = temp;
             }
-            else {
+            else
+            {
                 // delete one element from middle of the linkedlist
-                for (int i = 0; i < index-1; i++){
+                for (int i = 0; i < index - 1; i++)
+                {
                     temp = temp->next;
                 }
-                Node* node = temp->next;
-                Node* nodeNxt = node->next;
+                Node *node = temp->next;
+                Node *nodeNxt = node->next;
                 temp->next = node->next;
                 nodeNxt->prev = temp;
                 node->next = NULL;
@@ -82,21 +100,26 @@ public:
             length--;
         }
     }
-    void deleteValue(int value){
+
+    void deleteValue(int value)
+    {
         int index = 0;
-        Node* temp = head;
-        while(temp!=NULL){
-            if (temp->value == value){
+        Node *temp = head;
+        while (temp != NULL)
+        {
+            if (temp->value == value)
+            {
                 deletePosition(index);
                 return;
             }
             index++;
-            temp=temp->next;
+            temp = temp->next;
         }
     }
 };
 
-int main(){
+int main()
+{
     DLL list1;
     list1.insert(0);
     list1.insert(10);

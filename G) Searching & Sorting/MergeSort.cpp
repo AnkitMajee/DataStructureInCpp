@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main()
+{
     // Sample array
     int arr[] = {12, 11, 13, 5, 6, 7};
     int arrSize = sizeof(arr) / sizeof(arr[0]);
@@ -24,7 +25,8 @@ int main() {
 }
 
 // Function to merge two halves of the array
-void merge(int arr[], int left, int mid, int right) {
+void merge(int arr[], int left, int mid, int right)
+{
     int n1 = mid - left + 1; // Size of the left subarray
     int n2 = right - mid;    // Size of the right subarray
 
@@ -39,11 +41,15 @@ void merge(int arr[], int left, int mid, int right) {
 
     // Merge the temporary arrays back into the original array
     int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (leftArr[i] <= rightArr[j]) {
+    while (i < n1 && j < n2)
+    {
+        if (leftArr[i] <= rightArr[j])
+        {
             arr[k] = leftArr[i];
             i++;
-        } else {
+        }
+        else
+        {
             arr[k] = rightArr[j];
             j++;
         }
@@ -51,14 +57,16 @@ void merge(int arr[], int left, int mid, int right) {
     }
 
     // Copy the remaining elements of leftArr[], if any
-    while (i < n1) {
+    while (i < n1)
+    {
         arr[k] = leftArr[i];
         i++;
         k++;
     }
 
     // Copy the remaining elements of rightArr[], if any
-    while (j < n2) {
+    while (j < n2)
+    {
         arr[k] = rightArr[j];
         j++;
         k++;
@@ -66,8 +74,10 @@ void merge(int arr[], int left, int mid, int right) {
 }
 
 // Function to perform merge sort
-void mergeSort(int arr[], int left, int right) {
-    if (left < right) {
+void mergeSort(int arr[], int left, int right)
+{
+    if (left < right)
+    {
         // Calculate the middle point
         int mid = left + (right - left) / 2;
 
@@ -79,4 +89,3 @@ void mergeSort(int arr[], int left, int right) {
         merge(arr, left, mid, right);
     }
 }
-

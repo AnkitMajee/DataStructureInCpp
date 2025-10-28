@@ -21,70 +21,80 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    void dfs(vector<vector<char>>& board, vector<vector<int>>& visit, int i, int j) {
+    void dfs(vector<vector<char>> &board, vector<vector<int>> &visit, int i, int j)
+    {
         int n = board.size(), m = board[0].size();
-        if (i < 0 || j < 0 || i >= n || j >= m || board[i][j] != 'O' || visit[i][j] == 1) {
+        if (i < 0 || j < 0 || i >= n || j >= m || board[i][j] != 'O' || visit[i][j] == 1)
+        {
             return;
         }
-        
+
         // mark this as visited in the start
         visit[i][j] = 1;
-        
+
         // 4 directions
         vector<vector<int>> offset = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        
-        
-        for (auto value : offset) {
+
+        for (auto value : offset)
+        {
             int new_row = i + value[0], new_col = j + value[1];
             dfs(board, visit, new_row, new_col);
         }
     }
 
-    void solve(vector<vector<char>>& board) {
+    void solve(vector<vector<char>> &board)
+    {
         int n = board.size(), m = board[0].size();
         vector<vector<int>> visit(n, vector<int>(m, 0));
 
-        
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (i == 0 || j == 0 || i == n - 1 || j == m - 1) {
-                    if (board[i][j] == 'O' && visit[i][j] != 1) {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (i == 0 || j == 0 || i == n - 1 || j == m - 1)
+                {
+                    if (board[i][j] == 'O' && visit[i][j] != 1)
+                    {
                         dfs(board, visit, i, j);
                     }
                 }
             }
         }
 
-    
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
                 board[i][j] = (visit[i][j] == 1) ? 'O' : 'X';
             }
         }
     }
 };
 
-int main() {
+int main()
+{
     Solution sol;
-    
+
     vector<vector<char>> board = {
         {'X', 'X', 'X', 'X'},
         {'X', 'O', 'O', 'X'},
         {'X', 'X', 'O', 'X'},
-        {'X', 'O', 'X', 'X'}
-    };
-    
+        {'X', 'O', 'X', 'X'}};
+
     sol.solve(board);
-    
+
     cout << " Result : " << endl;
-    for (const auto& row : board) {
-        for (char cell : row) {
+    for (const auto &row : board)
+    {
+        for (char cell : row)
+        {
             cout << cell << " ";
         }
         cout << endl;
     }
-    
+
     return 0;
 }

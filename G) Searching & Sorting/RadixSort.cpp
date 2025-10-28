@@ -1,5 +1,4 @@
 // C++ implementation of Radix Sort
-
 #include <iostream>
 using namespace std;
 
@@ -19,10 +18,9 @@ int getMax(int arr[], int n)
 // represented by exp.
 void countSort(int arr[], int n, int exp)
 {
-
     // Output array
     int output[n];
-    int i, count[10] = { 0 };
+    int i, count[10] = {0};
 
     // Store count of occurrences
     // in count[]
@@ -36,7 +34,8 @@ void countSort(int arr[], int n, int exp)
         count[i] += count[i - 1];
 
     // Build the output array
-    for (i = n - 1; i >= 0; i--) {
+    for (i = n - 1; i >= 0; i--)
+    {
         output[count[(arr[i] / exp) % 10] - 1] = arr[i];
         count[(arr[i] / exp) % 10]--;
     }
@@ -75,7 +74,7 @@ void print(int arr[], int n)
 // Driver Code
 int main()
 {
-    int arr[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
+    int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     // Function Call

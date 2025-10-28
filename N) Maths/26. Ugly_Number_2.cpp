@@ -20,7 +20,6 @@
 // then at the end we have the nth Ugly Number
 // To ensure taht duplicate values are not added, we also use a set and check if it has been added previously or not
 
-
 // Solution
 
 #include <iostream>
@@ -30,30 +29,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int nthUglyNumber(int n) {
-        
-        priority_queue<long long,vector<long long>,greater<>> pq;
+    int nthUglyNumber(int n)
+    {
+
+        priority_queue<long long, vector<long long>, greater<>> pq;
         // minheap
 
         pq.push(1);
         long long curr = 1;
         unordered_set<int> visit = {1};
 
-        for (int i = 0 ; i < n ; i++){
+        for (int i = 0; i < n; i++)
+        {
             curr = pq.top();
             pq.pop();
 
-            if (visit.find(2 * curr) == visit.end()){
+            if (visit.find(2 * curr) == visit.end())
+            {
                 visit.insert(2 * curr);
                 pq.push(2 * curr);
             }
-            if (visit.find(3 * curr) == visit.end()){
+            if (visit.find(3 * curr) == visit.end())
+            {
                 visit.insert(3 * curr);
                 pq.push(3 * curr);
             }
-            if (visit.find(5 * curr) == visit.end()){
+            if (visit.find(5 * curr) == visit.end())
+            {
                 visit.insert(5 * curr);
                 pq.push(5 * curr);
             }
@@ -63,15 +68,14 @@ public:
     }
 };
 
-
 int main()
 {
     Solution sol;
     int n = 10;
 
     int result = sol.nthUglyNumber(n);
-        
-    cout << "Result : " << result <<endl;
+
+    cout << "Result : " << result << endl;
 
     return 0;
 }

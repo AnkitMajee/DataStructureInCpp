@@ -38,6 +38,7 @@ Node *insertIntoBST(Node *root, int data)
     }
     return root;
 }
+
 void takeInput(Node *&root)
 {
     int data;
@@ -127,6 +128,7 @@ Node *minVal(Node *root)
     }
     return temp;
 }
+
 Node *maxVal(Node *root)
 {
     Node *temp = root;
@@ -190,6 +192,7 @@ Node *deleteFromBST(Node *root, int val)
         return root;
     }
 }
+
 int main()
 {
     Node *root = NULL;
@@ -227,5 +230,6 @@ int main()
     cout << endl;
     cout << "Min value is " << minVal(root)->data << endl;
     cout << "Max value is " << maxVal(root)->data << endl;
+    
     return 0;
 }
